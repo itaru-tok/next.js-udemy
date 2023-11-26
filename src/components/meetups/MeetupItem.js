@@ -1,3 +1,5 @@
+/*  The `useContext` hook allows us to access the value of a context object that has been
+created using the `createContext` function. */
 import { useContext } from 'react'
 
 import Card from '../ui/Card'

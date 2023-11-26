@@ -27,6 +27,8 @@ export function FavoritesContextProvider(props) {
     return userFavorites.some((meetup) => meetup.id === meetupId)
   }
 
+  /* The `context` object is created to provide the necessary values and functions to the components that
+will consume the `FavoritesContext`. */
   const context = {
     favorites: userFavorites,
     totalFavorites: userFavorites.length,
@@ -35,6 +37,8 @@ export function FavoritesContextProvider(props) {
     itemIsFavorite: itemIsFavoriteHandler,
   }
 
+  /* This allows FavoritesContext.Provider components to access the values and
+functions defined in the `context` object using the `useContext` hook. */
   return (
     <FavoritesContext.Provider value={context}>
       {props.children}
