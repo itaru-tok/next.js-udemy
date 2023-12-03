@@ -33,11 +33,23 @@ function FilteredEventsPage() {
     }
   }, [data])
 
+  let pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta name="description" content={`A list of filtered events.`} />
+    </Head>
+  )
+
   /*  If it is, it means that the data is still being loaded or has
 not been fetched yet. In this case, the code returns a loading message to indicate that the data is
 being fetched. */
   if (!loadedEvents) {
-    return <p className="center">Loading...</p>
+    return (
+      <Fragment>
+        {pageHeadData}
+        <p className="center">Loading...</p>
+      </Fragment>
+    )
   }
 
   const filteredYear = filteredData[0]
@@ -45,6 +57,16 @@ being fetched. */
 
   const numYear = +filteredYear
   const numMonth = +filteredMonth
+
+  pageHeadData = (
+    <Head>
+      <title>Filtered Events</title>
+      <meta
+        name="description"
+        content={`All events for ${numMonth}/${numYear}.`}
+      />
+    </Head>
+  )
 
   if (
     isNaN(numYear) ||
@@ -57,6 +79,7 @@ being fetched. */
   ) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>Invalid filter. Please adjust your values!</p>
         </ErrorAlert>
@@ -78,6 +101,7 @@ being fetched. */
   if (!filteredEvents || filteredEvents.length === 0) {
     return (
       <Fragment>
+        {pageHeadData}
         <ErrorAlert>
           <p>No events found for the chosen filter!</p>
         </ErrorAlert>
@@ -92,13 +116,7 @@ being fetched. */
 
   return (
     <Fragment>
-      <Head>
-        <title>Filtered Events</title>
-        <meta
-          name="description"
-          content={`All events for ${numMonth}/${numYear}.`}
-        />
-      </Head>
+      {pageHeadData}
       <ResultsTitle date={date} />
       <EventList items={filteredEvents} />
     </Fragment>
