@@ -13,9 +13,11 @@
   color: #03be9f;
   border: 1px solid #03be9f;
   cursor: pointer;
+  background-color: #dcfff9;
 }
 
 .comments button:hover,
 .comments button:active {
-  background-color: #dcfff9;
+  opacity: 0.8;
+  transition: all 0.3s ease;
 }
