@@ -1,4 +1,4 @@
-import { createContext, useState } from 'react'
+import { createContext, useState, useEffect } from 'react'
 
 /* This context object will be used to
 share data and functions between components in a React application. */
@@ -10,6 +10,22 @@ const NotificationContext = createContext({
 
 export function NotificationContextProvider(props) {
   const [activeNotification, setActiveNotification] = useState()
+
+  useEffect(() => {
+    if (
+      activeNotification &&
+      (activeNotification.status === 'success' ||
+        activeNotification.status === 'error')
+    ) {
+      const timer = setTimeout(() => {
+        setActiveNotification(null)
+      }, 2000)
+
+      return () => {
+        clearTimeout(timer)
+      }
+    }
+  }, [activeNotification])
 
   function showNotificationHandler(notificationData) {
     setActiveNotification(notificationData)
